@@ -1,24 +1,24 @@
 # django_register_with_email_confirm
 
-Inscription avec activation du compte après confirmation du mail
+    Inscription avec activation du compte après confirmation du mail
 
-créer un fichier token.py dans notre application qui gère la connexion et l'inscription
-contenu de token.py
+    créer un fichier token.py dans notre application qui gère la connexion et l'inscription
+    contenu de token.py
 
 ### in token.py #####
 
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.utils import six
+    from django.contrib.auth.tokens import PasswordResetTokenGenerator
+    from django.utils import six
 
 
-class TokenGenerator(PasswordResetTokenGenerator):
-    def _make_hash_value(self, user, timestamp):
-        return (
-            six.text_type(user.pk) + six.text_type(timestamp) +
-            six.text_type(user.is_active)
-        )
-account_activation_token = TokenGenerator()
-in views.py
+    class TokenGenerator(PasswordResetTokenGenerator):
+        def _make_hash_value(self, user, timestamp):
+            return (
+                six.text_type(user.pk) + six.text_type(timestamp) +
+                six.text_type(user.is_active)
+            )
+    account_activation_token = TokenGenerator()
+    in views.py
 ### in views.py #####
 from django.shortcuts import render,redirect
 
