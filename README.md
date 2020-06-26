@@ -4,6 +4,9 @@ Inscription avec activation du compte après confirmation du mail
 
 créer un fichier token.py dans notre application qui gère la connexion et l'inscription
 contenu de token.py
+
+### in token.py #####
+
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.utils import six
 
@@ -165,3 +168,13 @@ def activate(request, uidb64, token):
         return redirect('index')
     else:
         return render(request, 'invalide_token.html')
+
+dans le fichier urls.py
+
+path('account_confirm/<slug:uidb64>/<slug:token>/',views.activate,name="account_confirm_email"),#### route de confirmation du mail
+
+Dans votre dossier templates créer le fichier account_activation_email.html
+  
+{% autoescape off %} Hi {{ user.username }}, Please click on the link to confirm
+your registration, {{ domain }}{% url 'account_confirm_email' uidb64=uid token=token %}
+{% endautoescape %}

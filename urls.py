@@ -1,0 +1,1 @@
+path('account_confirm/<slug:uidb64>/<slug:token>/',views.activate,name="account_confirm_email"),#### route de confirmation du mail
